@@ -8,12 +8,14 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate{
     
     var businesses: [Business]!
+    var searchedData: [Business]! = []
     @IBOutlet weak var tableView: UITableView!
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
+    var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +33,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-        
-        //self.navigationItem.title = "Yelp"
+
         createSearchBar()
         searchRestaurants()
         
@@ -45,6 +46,9 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             
             self.businesses = businesses
             
+            self.searchedData = businesses
+            
+            self.isMoreDataLoading = false
             
             self.tableView.reloadData()
             if let businesses = businesses {
@@ -69,6 +73,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        businesses = searchText.isEmpty ? businesses : searchedData.filter({$0.name!.lowercased().contains(searchText.lowercased())})
+        
+        tableView.reloadData()
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (!isMoreDataLoading) {
             // Calculate the position of one screen length before the bottom of the results
@@ -85,7 +96,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
                 loadingMoreView!.startAnimating()
                 
                 // Code to load more results
-                loadMoreData()
+                searchRestaurants()
+                //loadMoreData()
             }
         }
     }
@@ -94,7 +106,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search"
-        //searchBar.delegate = self
+        searchBar.delegate = self
         navigationItem.titleView = searchBar
         
     }
@@ -117,34 +129,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         cell.business = businesses[indexPath.row]
         
         return cell
-    }
-    
-    func loadMoreData() {
-        
-        // ... Create the NSURLRequest (myRequest) ...
-        /*let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                //self.alert()
-                print(error.localizedDescription)
-            } else if let data = data {*/
-            
-            // Update flag
-            self.isMoreDataLoading = false
-            
-            // Stop the loading indicator
-            self.loadingMoreView!.stopAnimating()
-            
-            // ... Use the new data to update the data source ...
-            
-            // Reload the tableView now that there is new data
-            //self.tableView.reloadData()
-            //}
-        //}
-        //task.resume()
     }
     
     /*
