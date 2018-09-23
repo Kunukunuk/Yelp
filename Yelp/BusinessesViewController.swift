@@ -51,12 +51,12 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func createSearchBar() {
-     
+        
         let searchBar = UISearchBar()
         searchBar.placeholder = "Type restaurant name"
         //searchBar.delegate = self
-        
         navigationItem.titleView = searchBar
+        
     }
     
     override func didReceiveMemoryWarning() {
