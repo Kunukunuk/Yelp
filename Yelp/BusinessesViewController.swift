@@ -32,7 +32,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
-        self.navigationItem.title = "Yelp"
+        //self.navigationItem.title = "Yelp"
         createSearchBar()
         searchRestaurants()
         
@@ -93,7 +93,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func createSearchBar() {
         
         let searchBar = UISearchBar()
-        searchBar.placeholder = "Type restaurant name"
+        searchBar.placeholder = "Search"
         //searchBar.delegate = self
         navigationItem.titleView = searchBar
         

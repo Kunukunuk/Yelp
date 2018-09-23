@@ -135,6 +135,33 @@
             </objects>
             <point key="canvasLocation" x="2727.1999999999998" y="357.57121439280365"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="YPZ-2o-oSd">
+            <objects>
+                <viewController id="pEN-KY-Ot9" customClass="MapViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lIi-fN-UAG"/>
+                        <viewControllerLayoutGuide type="bottom" id="eoK-Ue-iLx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="udr-OR-pir">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-n5-Tb9">
+                                <rect key="frame" x="0.0" y="36" width="375" height="631"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="dI8-n5-Tb9" id="Gc2-c3-9er"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vuR-gy-hBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3768.8000000000002" y="357.57121439280365"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="enm-qx-r0Y">
             <objects>
