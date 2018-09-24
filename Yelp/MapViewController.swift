@@ -19,9 +19,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        goToMapView.delegate = self
         // Do any additional setup after loading the view.
         let centerLocation = CLLocation(latitude: 37.7833, longitude: -122.4167)
-        addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2DMake(centerLocation.coordinate.latitude, centerLocation.coordinate.longitude))
         goToLocation(location: centerLocation)
         
         locationManager = CLLocationManager()
@@ -29,6 +29,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
+        
+        addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2DMake(centerLocation.coordinate.latitude, centerLocation.coordinate.longitude))
+        
     }
     
     func goToLocation(location: CLLocation) {
@@ -77,6 +80,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "customAnnotationView"
         
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
+        
         // custom image annotation
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if (annotationView == nil) {
@@ -85,7 +92,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         else {
             annotationView!.annotation = annotation
         }
-        annotationView!.image = UIImage(named: "stars_5")
+        if let title = annotation.title, title == "An annotation!" {
+            annotationView!.image = UIImage(named: "stars_5")
+        }
         
         return annotationView
     }
