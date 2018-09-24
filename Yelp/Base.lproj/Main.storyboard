@@ -113,6 +113,7 @@
                                             <outlet property="ratingImageView" destination="aOD-cq-Q5w" id="WVP-Dm-Ack"/>
                                             <outlet property="reviewLabel" destination="a6E-tJ-XMg" id="Q19-ig-5NG"/>
                                             <outlet property="thumbImageView" destination="eA3-WN-EkS" id="IQh-qk-7Wg"/>
+                                            <segue destination="pEN-KY-Ot9" kind="show" id="Y88-mU-BM1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
