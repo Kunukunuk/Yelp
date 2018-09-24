@@ -113,7 +113,6 @@
                                             <outlet property="ratingImageView" destination="aOD-cq-Q5w" id="WVP-Dm-Ack"/>
                                             <outlet property="reviewLabel" destination="a6E-tJ-XMg" id="Q19-ig-5NG"/>
                                             <outlet property="thumbImageView" destination="eA3-WN-EkS" id="IQh-qk-7Wg"/>
-                                            <segue destination="pEN-KY-Ot9" kind="show" id="Y88-mU-BM1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -127,7 +126,13 @@
                             <constraint firstItem="adT-US-0qK" firstAttribute="top" secondItem="Pye-F9-fNl" secondAttribute="bottom" id="p58-5U-GTP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8qg-9A-1j1"/>
+                    <navigationItem key="navigationItem" id="8qg-9A-1j1">
+                        <barButtonItem key="rightBarButtonItem" title="MapView" id="brR-J8-M3Q">
+                            <connections>
+                                <segue destination="pEN-KY-Ot9" kind="show" identifier="MapViewResults" id="cBt-YR-elb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="adT-US-0qK" id="XTC-sk-bN3"/>
                     </connections>
@@ -148,12 +153,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-n5-Tb9">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-n5-Tb9">
                                 <rect key="frame" x="0.0" y="36" width="375" height="631"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dI8-n5-Tb9" firstAttribute="width" secondItem="udr-OR-pir" secondAttribute="width" id="UIR-3M-ECv"/>
+                            <constraint firstItem="dI8-n5-Tb9" firstAttribute="height" secondItem="udr-OR-pir" secondAttribute="height" id="bSQ-YH-seI"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="dI8-n5-Tb9" id="Gc2-c3-9er"/>
