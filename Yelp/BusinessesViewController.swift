@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate{
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate {
     
     var businesses: [Business]!
     var searchedData: [Business]! = []
@@ -142,8 +142,16 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! MapViewController
-        vc.data = businesses
+        if (segue.identifier == "MapViewResults") {
+            let vc = segue.destination as! MapViewController
+            vc.data = businesses
+        } else if (segue.identifier == "DetailsSegue") {
+            let vc = segue.destination as! DetailsViewController
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)!
+            
+            vc.singleBusiness = businesses[indexPath.row]
+        }
     }
     
 }

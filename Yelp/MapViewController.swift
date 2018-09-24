@@ -16,6 +16,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var goToMapView: MKMapView!
     var locationManager : CLLocationManager!
     var data: [Business]! = []
+    var businessName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let span = MKCoordinateSpanMake(0.1, 0.1)
+            let span = MKCoordinateSpanMake(0.01, 0.01)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             goToMapView.setRegion(region, animated: false)
         }
@@ -69,7 +70,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             if let placemarks = placemarks {
                 if placemarks.count != 0 {
-                    print("hello I am here")
                     let coordinate = placemarks.first!.location!
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = coordinate.coordinate
@@ -83,14 +83,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func createAnnontationsOnMap() {
         if let businesses = data {
             for business in businesses {
-                print(business.name!, " ******")
-                print(business.address!)
                 addAnnotationAtAddress(address: business.address!, title: business.name!)
             }
         }
     }
-    
-    /*func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        businessName = (view.annotation?.title)!!
+        performSegue(withIdentifier: "GoToDetails", sender: self)
+    }
+   /* func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "customAnnotationView"
         
         guard !(annotation is MKUserLocation) else {
@@ -105,21 +107,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         else {
             annotationView!.annotation = annotation
         }
-        if let title = annotation.title, title == "An annotation!" {
+        /*if let title = annotation.title, title == "An annotation!" {
             annotationView!.image = UIImage(named: "stars_5")
-        }
+     
+        }*/
         
         return annotationView
     } */
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let vc = segue.destination as! DetailsViewController
+        
+        if let businesses = data {
+            for business in businesses {
+                if business.name == businessName {
+                    vc.singleBusiness = business
+                }
+            }
+        }
+        
     }
-    */
 
 }

@@ -16,6 +16,7 @@ class Business: NSObject {
     let distance: String?
     let ratingImage: UIImage?
     let reviewCount: NSNumber?
+    let id:  String?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -61,6 +62,8 @@ class Business: NSObject {
         } else {
             distance = nil
         }
+        
+        self.id = dictionary["id"] as? String
         
         let rating = dictionary["rating"] as? Double
         if rating != nil {
