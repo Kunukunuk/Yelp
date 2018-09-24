@@ -164,7 +164,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="dI8-n5-Tb9" id="Gc2-c3-9er"/>
+                        <outlet property="goToMapView" destination="dI8-n5-Tb9" id="pvb-pg-8ff"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vuR-gy-hBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
