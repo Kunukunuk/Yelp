@@ -15,6 +15,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     @IBOutlet weak var goToMapView: MKMapView!
     var locationManager : CLLocationManager!
+    var data: [Business]! = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +32,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.requestWhenInUseAuthorization()
         
         addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2DMake(centerLocation.coordinate.latitude, centerLocation.coordinate.longitude))
+        createAnnontationsOnMap()
         
     }
     
     func goToLocation(location: CLLocation) {
-        let span = MKCoordinateSpanMake(0.1, 0.1)
+        let span = MKCoordinateSpanMake(0.01, 0.01)
         let region = MKCoordinateRegionMake(location.coordinate, span)
         goToMapView.setRegion(region, animated: false)
     }
@@ -67,6 +69,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             if let placemarks = placemarks {
                 if placemarks.count != 0 {
+                    print("hello I am here")
                     let coordinate = placemarks.first!.location!
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = coordinate.coordinate
@@ -77,7 +80,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    func createAnnontationsOnMap() {
+        if let businesses = data {
+            for business in businesses {
+                print(business.name!, " ******")
+                print(business.address!)
+                addAnnotationAtAddress(address: business.address!, title: business.name!)
+            }
+        }
+    }
+    
+    /*func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "customAnnotationView"
         
         guard !(annotation is MKUserLocation) else {
@@ -97,7 +110,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         return annotationView
-    }
+    } */
     
     /*
     // MARK: - Navigation
