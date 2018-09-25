@@ -44,12 +44,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             if self.isMoreDataLoading {
+                print("in more data loading")
                 self.businesses = self.businesses + businesses!
             } else {
+                print("in no more data loading")
                 self.businesses = businesses
             }
-            
-            self.searchedData = businesses
+            self.searchedData = self.businesses
             
             self.isMoreDataLoading = false
             self.loadingMoreView!.stopAnimating()
@@ -80,6 +81,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText == "" {
+            print(searchedData.count)
             businesses = searchedData
             tableView.reloadData()
         }

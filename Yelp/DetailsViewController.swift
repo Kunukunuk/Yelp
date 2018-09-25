@@ -32,20 +32,30 @@ class DetailsViewController: UIViewController {
         reviewCountLabel.text = "\(singleBusiness!.reviewCount) Reviews"
         starRatingImageView.image = singleBusiness!.ratingImage
         
+        //getReviews()
         //tableView.dataSource = self
     }
     
-    /*func getReviews() {
+   /* func getReviews() {
         let id = singleBusiness?.id!
-        Business.getReviews(businessId: id!, completion: {(businesses: [Business]?, error: Error?) -> Void
-            in
-            
-            if let businesses = businesses {
-                for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
-                }
+        let url = URL(string: "https://api.yelp.com/v3/businesses/\(id!)/reviews")!
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            // This will run when the network request returns
+            if let error = error {
+                //self.alert()
+                print(error.localizedDescription)
+            } else if let data = data {
+               
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                print(dataDictionary, " *****")
+                let movies = dataDictionary["reviews"] as? [[String: Any]]
+                print(movies)
+                
+                
             }
-        })
+        }
+        task.resume()
     }*/
 }
