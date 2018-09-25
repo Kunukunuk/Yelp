@@ -93,4 +93,8 @@ class YelpClient: AFHTTPRequestOperationManager {
                         })!
         
     }
+    
+    func resetOffset() {
+        offset = 0
+    }
 }

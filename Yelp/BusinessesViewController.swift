@@ -11,10 +11,10 @@ import UIKit
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate {
     
     var businesses: [Business]!
-    var searchedData: [Business]! = []
     @IBOutlet weak var tableView: UITableView!
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
+    var searchRestaurant = "Restaurant"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +41,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func searchRestaurants() {
         
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+        Business.searchWithTerm(term: searchRestaurant, completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             if self.isMoreDataLoading {
                 self.businesses = self.businesses + businesses!
             } else {
+                print("am I here?")
                 self.businesses = businesses
             }
-            self.searchedData = self.businesses
+            //self.searchedData = self.businesses
             
             self.isMoreDataLoading = false
             self.loadingMoreView!.stopAnimating()
@@ -79,14 +80,12 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText == "" {
-            print(searchedData.count)
-            businesses = searchedData
-            tableView.reloadData()
+            searchRestaurant = "Restaurant"
+            YelpClient.sharedInstance.resetOffset()
+            searchRestaurants()
+            tableView.setContentOffset(.zero, animated: true)
         }
         
-        businesses = searchText.isEmpty ? businesses : searchedData.filter({$0.name!.lowercased().contains(searchText.lowercased())})
-        
-        tableView.reloadData()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -114,10 +113,18 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func createSearchBar() {
         
         let searchBar = UISearchBar()
-        searchBar.placeholder = "Search"
+        searchBar.placeholder = "Restaurants"
         searchBar.delegate = self
         navigationItem.titleView = searchBar
         
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar.text != nil {
+            searchRestaurant = searchBar.text!
+            searchRestaurants()
+            tableView.setContentOffset(.zero, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {
