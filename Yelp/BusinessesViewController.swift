@@ -15,7 +15,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
-    var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

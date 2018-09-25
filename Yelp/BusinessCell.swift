@@ -11,7 +11,6 @@ import UIKit
 class BusinessCell: UITableViewCell {
 
     @IBOutlet weak var thumbImageView: UIImageView!
-    
     @IBOutlet weak var ratingImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!

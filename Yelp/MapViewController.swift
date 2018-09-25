@@ -10,6 +10,16 @@ import UIKit
 import MapKit
 import CoreLocation
 
+class customAnnotation: NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    
+    init(pinTitle: String, location: CLLocationCoordinate2D) {
+        self.title = pinTitle
+        self.coordinate = location
+    }
+}
+
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
 
@@ -51,7 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let span = MKCoordinateSpanMake(0.01, 0.01)
+            let span = MKCoordinateSpanMake(0.03, 0.03)
             let region = MKCoordinateRegionMake(location.coordinate, span)
             goToMapView.setRegion(region, animated: false)
         }
@@ -72,9 +82,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 if placemarks.count != 0 {
                     let coordinate = placemarks.first!.location!
                     let annotation = MKPointAnnotation()
+                    let custom = customAnnotation(pinTitle: title, location: coordinate.coordinate)
                     annotation.coordinate = coordinate.coordinate
                     annotation.title = title
-                    self.goToMapView.addAnnotation(annotation)
+                    self.goToMapView.addAnnotation(custom)
                 }
             }
         }
@@ -91,9 +102,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         businessName = (view.annotation?.title)!!
         performSegue(withIdentifier: "GoToDetails", sender: self)
+        
     }
-   /* func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = "customAnnotationView"
+    
+   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "customannotation"
         
         guard !(annotation is MKUserLocation) else {
             return nil
@@ -103,17 +116,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if (annotationView == nil) {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
         }
         else {
             annotationView!.annotation = annotation
         }
-        /*if let title = annotation.title, title == "An annotation!" {
-            annotationView!.image = UIImage(named: "stars_5")
-     
-        }*/
+    
+        annotationView!.image = UIImage(named: "Food")
         
         return annotationView
-    } */
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! DetailsViewController

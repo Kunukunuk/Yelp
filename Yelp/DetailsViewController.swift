@@ -32,16 +32,7 @@ class DetailsViewController: UIViewController {
         reviewCountLabel.text = "\(singleBusiness!.reviewCount) Reviews"
         starRatingImageView.image = singleBusiness!.ratingImage
         
-        getReviews()
         //tableView.dataSource = self
-    }
-    
-    func getReviews() {
-        print(singleBusiness?.id)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return singleBusiness!.reviewCount as! Int
     }
     
 
