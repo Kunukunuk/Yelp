@@ -46,7 +46,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             if self.isMoreDataLoading {
                 self.businesses = self.businesses + businesses!
             } else {
-                print("am I here?")
                 self.businesses = businesses
             }
             //self.searchedData = self.businesses
