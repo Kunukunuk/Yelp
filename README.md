@@ -21,7 +21,8 @@ The following **stretch** features are implemented:
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
-- [X] Custome Annotation Image
+- [X] Custom Annotation Image
+- [X] Click to annotation image to show callouts, click on callouts to go to detail view
 - [ ] Getting business reviews not successful
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
@@ -33,7 +34,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-![kun_huang_yelp](https://user-images.githubusercontent.com/28847045/45988969-92a07380-c047-11e8-8ba5-6a00d6c3d5af.gif)
+![kun_huang_yelp01](https://user-images.githubusercontent.com/28847045/45990671-65f05a00-c04f-11e8-92fb-fdf1c1da2fd9.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
