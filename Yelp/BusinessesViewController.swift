@@ -44,10 +44,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             if self.isMoreDataLoading {
-                print("in more data loading")
                 self.businesses = self.businesses + businesses!
             } else {
-                print("in no more data loading")
                 self.businesses = businesses
             }
             self.searchedData = self.businesses
@@ -152,6 +150,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             let indexPath = tableView.indexPath(for: cell)!
             
             vc.singleBusiness = businesses[indexPath.row]
+            vc.getReviews()
         }
     }
     

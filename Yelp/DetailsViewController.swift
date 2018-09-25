@@ -8,10 +8,10 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var name = ""
     var singleBusiness: Business?
+    var reviews: [BusinessReview]!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var businessPicImageView: UIImageView!
@@ -29,33 +29,41 @@ class DetailsViewController: UIViewController {
         businessPicImageView.setImageWith(singleBusiness!.imageURL!)
         foodCategoryLabel.text = singleBusiness!.categories
         addressLabel.text = singleBusiness!.address
-        reviewCountLabel.text = "\(singleBusiness!.reviewCount) Reviews"
+        reviewCountLabel.text = "\(singleBusiness!.reviewCount!) Reviews"
         starRatingImageView.image = singleBusiness!.ratingImage
         
-        //getReviews()
-        //tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        
+        getReviews()
     }
     
-   /* func getReviews() {
-        let id = singleBusiness?.id!
-        let url = URL(string: "https://api.yelp.com/v3/businesses/\(id!)/reviews")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                //self.alert()
-                print(error.localizedDescription)
-            } else if let data = data {
-               
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                print(dataDictionary, " *****")
-                let movies = dataDictionary["reviews"] as? [[String: Any]]
-                print(movies)
-                
-                
-            }
+   func getReviews() {
+    let id = singleBusiness?.id!
+
+    BusinessReview.getReviews(businessId: id!, completion: {(reviews: [BusinessReview]?, error: Error?) -> Void
+        in
+        
+        self.reviews = reviews
+        self.tableView.reloadData()
+        
+        })
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if reviews != nil {
+            return reviews.count
+        } else {
+            return 0
         }
-        task.resume()
-    }*/
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewerCell", for: indexPath) as! ReviewerCell
+        cell.reviews = reviews[indexPath.row]
+        return cell
+    }
 }

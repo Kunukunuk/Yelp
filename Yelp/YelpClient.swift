@@ -77,14 +77,14 @@ class YelpClient: AFHTTPRequestOperationManager {
                         })!
     }
     
-    func getReview(with businessId: String, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+    func getReview(with businessId: String, completion: @escaping ([BusinessReview]?, Error?) -> Void) -> AFHTTPRequestOperation {
         
         return self.get("businesses/\(businessId)/reviews", parameters: "locale: en",
                         success: { (operation: AFHTTPRequestOperation, response: Any) -> Void in
                             if let response = response as? [String: Any]{
-                                let dictionaries = response["businesses"] as? [NSDictionary]
+                                let dictionaries = response["reviews"] as? [NSDictionary]
                                 if dictionaries != nil {
-                                    completion(Business.businesses(array: dictionaries!), nil)
+                                    completion(BusinessReview.reviews(array: dictionaries!), nil)
                                 }
                             }
                         },

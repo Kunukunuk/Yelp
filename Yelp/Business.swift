@@ -123,7 +123,4 @@ class Business: NSObject {
         _ = YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, openNow: false, completion: completion)
     }
     
-    class func getReviews(businessId: String, completion: @escaping ([Business]?, Error?) -> Void) {
-        _ = YelpClient.sharedInstance.getReview(with: businessId, completion: completion)
-    }
 }
