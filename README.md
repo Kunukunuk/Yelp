@@ -24,6 +24,8 @@ The following **additional** features are implemented:
 - [X] Custom Annotation Image
 - [X] Click to annotation image to show callouts, click on callouts to go to detail view
 - [X] Business reviews on detail view
+- [X] Clickling x results in default restaurant search and goes to top of tableview
+- [X] Searching anything goes to top of tableview
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -34,7 +36,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-![kun_huang_yelp01](https://user-images.githubusercontent.com/28847045/45990671-65f05a00-c04f-11e8-92fb-fdf1c1da2fd9.gif)
+![kun_huang_yelp02](https://user-images.githubusercontent.com/28847045/46006532-c13d3f00-c085-11e8-8e7a-00600eedaf6d.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
