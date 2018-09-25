@@ -119,7 +119,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iAI-kc-8j9">
-                                <rect key="frame" x="37.5" y="167" width="300" height="333.5"/>
+                                <rect key="frame" x="-462.5" y="167" width="300" height="333.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Zt-Dt-mAp">
                                         <rect key="frame" x="0.0" y="274.5" width="300" height="67"/>
@@ -156,7 +156,7 @@
                             <constraint firstItem="i6u-Sa-ake" firstAttribute="top" secondItem="adT-US-0qK" secondAttribute="bottom" id="23k-Cz-Sqo"/>
                             <constraint firstAttribute="trailing" secondItem="adT-US-0qK" secondAttribute="trailing" id="3cC-ay-lDp"/>
                             <constraint firstItem="iAI-kc-8j9" firstAttribute="height" secondItem="XhR-oz-92f" secondAttribute="height" multiplier="1:2" id="aey-2J-KKr"/>
-                            <constraint firstItem="iAI-kc-8j9" firstAttribute="centerX" secondItem="XhR-oz-92f" secondAttribute="centerX" id="eDd-j5-IQJ"/>
+                            <constraint firstItem="iAI-kc-8j9" firstAttribute="centerX" secondItem="XhR-oz-92f" secondAttribute="centerX" constant="-500" id="eDd-j5-IQJ"/>
                             <constraint firstItem="iAI-kc-8j9" firstAttribute="width" secondItem="XhR-oz-92f" secondAttribute="width" multiplier="8:10" id="eqK-7Z-eTJ"/>
                             <constraint firstItem="adT-US-0qK" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="hrZ-a5-HG4"/>
                             <constraint firstItem="adT-US-0qK" firstAttribute="top" secondItem="Pye-F9-fNl" secondAttribute="bottom" id="p58-5U-GTP"/>
