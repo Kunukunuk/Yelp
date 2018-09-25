@@ -39,6 +39,8 @@ Here's a walkthrough of implemented user stories:
 
 ![kun_huang_yelp02](https://user-images.githubusercontent.com/28847045/46006532-c13d3f00-c085-11e8-8e7a-00600eedaf6d.gif)
 
+![kun_huang_yelp03](https://user-images.githubusercontent.com/28847045/46013771-2f403100-c09b-11e8-9b21-524fb2d31849.gif)
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
