@@ -98,10 +98,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        performSegue(withIdentifier: "GoToDetails", sender: self)
+    }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         businessName = (view.annotation?.title)!!
-        performSegue(withIdentifier: "GoToDetails", sender: self)
         
     }
     
@@ -117,6 +120,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if (annotationView == nil) {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
         }
         else {
             annotationView!.annotation = annotation
