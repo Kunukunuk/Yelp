@@ -35,5 +35,17 @@ class DetailsViewController: UIViewController {
         //tableView.dataSource = self
     }
     
-
+    /*func getReviews() {
+        let id = singleBusiness?.id!
+        Business.getReviews(businessId: id!, completion: {(businesses: [Business]?, error: Error?) -> Void
+            in
+            
+            if let businesses = businesses {
+                for business in businesses {
+                    print(business.name!)
+                    print(business.address!)
+                }
+            }
+        })
+    }*/
 }
