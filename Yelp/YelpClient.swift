@@ -39,10 +39,10 @@ class YelpClient: AFHTTPRequestOperationManager {
     }
     
     func searchWithTerm(_ term: String, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
-        return searchWithTerm(term, sort: nil, categories: nil, openNow: nil, completion: completion)
+        return searchWithTerm(term, sort: nil, openNow: nil, completion: completion)
     }
     
-    func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, openNow: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(_ term: String, sort: YelpSortMode?, openNow: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see https://www.yelp.com/developers/documentation/v3/business_search
         
         // Default the location to San Francisco
@@ -52,9 +52,9 @@ class YelpClient: AFHTTPRequestOperationManager {
             parameters["sort_by"] = sort!.rawValue as AnyObject?
         }
         
-        if categories != nil && categories!.count > 0 {
+        /*if categories != nil && categories!.count > 0 {
             parameters["categories"] = (categories!).joined(separator: ",") as AnyObject?
-        }
+        }*/
         
         if openNow != nil {
             parameters["open_now"] = openNow! as AnyObject

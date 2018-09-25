@@ -8,13 +8,18 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var businesses: [Business]!
     @IBOutlet weak var tableView: UITableView!
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
     var searchRestaurant = "Restaurant"
+    @IBOutlet weak var centerPopUp: NSLayoutConstraint!
+    let pickerData = ["Best Match", "Rating", "Review Count", "Distance"]
+    @IBOutlet weak var picker: UIPickerView!
+    var pickedRow = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +37,45 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
+        
+        picker.delegate = self
+        picker.dataSource = self
 
         createSearchBar()
         searchRestaurants()
         
         
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickedRow = row
+    }
+    @IBAction func sortBy(_ sender: UIBarButtonItem) {
+        pickedRow = 0
+        centerPopUp.constant = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .curveEaseOut, animations: { self.view.layoutIfNeeded()}, completion: nil)
+        
+    }
+    
+    
+    @IBAction func closePopUp(_ sender: UIButton) {
+        centerPopUp.constant = -500
+        
+        UIView.animate(withDuration: 0.3, animations: {self.view.layoutIfNeeded()})
+        sortRestaurants()
     }
     
     func searchRestaurants() {
@@ -64,15 +103,44 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
         )
         
-        /* Example of Yelp search with more search options specified
+        /*Example of Yelp search with more search options specified
          Business.searchWithTerm(term: "Restaurants", sort: .distance, categories: ["asianfusion", "burgers"]) { (businesses, error) in
          self.businesses = businesses
          for business in self.businesses {
          print(business.name!)
          print(business.address!)
          }
-         }
-         */
+         }*/
+ 
+        
+    }
+    
+    func sortRestaurants() {
+        
+        let sortBy: String?
+        
+        switch pickedRow {
+            case 1:
+                sortBy = ".rating"
+            case 2:
+                sortBy = ".review_count"
+            case 3:
+                sortBy = ".distance"
+            case 0:
+                sortBy = ".best_match"
+            default:
+                sortBy = ".best_match"
+        }
+        
+        Business.searchWithTerm(term: searchRestaurant, sort: YelpSortMode(rawValue: sortBy!)) { (businesses, error) in
+            self.businesses = businesses
+            self.tableView.setContentOffset(.zero, animated: true)
+            self.tableView.reloadData()
+            for business in self.businesses {
+                print(business.name!)
+                print(business.address!)
+            }
+        }
         
     }
     

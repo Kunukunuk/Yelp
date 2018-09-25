@@ -118,16 +118,56 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iAI-kc-8j9">
+                                <rect key="frame" x="37.5" y="167" width="300" height="333.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Zt-Dt-mAp">
+                                        <rect key="frame" x="0.0" y="274.5" width="300" height="67"/>
+                                        <state key="normal" title="Sort By"/>
+                                        <connections>
+                                            <action selector="closePopUp:" destination="2xI-yr-O5N" eventType="touchUpInside" id="22b-UX-U8o"/>
+                                        </connections>
+                                    </button>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bol-Lq-uLM">
+                                        <rect key="frame" x="8" y="8" width="300" height="266.5"/>
+                                    </pickerView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bol-Lq-uLM" firstAttribute="trailing" secondItem="iAI-kc-8j9" secondAttribute="trailingMargin" id="55s-hi-pqT"/>
+                                    <constraint firstAttribute="height" constant="333.5" id="7b0-v2-9SJ"/>
+                                    <constraint firstItem="bol-Lq-uLM" firstAttribute="top" secondItem="iAI-kc-8j9" secondAttribute="topMargin" id="9Dp-hj-xca"/>
+                                    <constraint firstItem="bol-Lq-uLM" firstAttribute="leading" secondItem="iAI-kc-8j9" secondAttribute="leadingMargin" id="KSO-8k-zOR"/>
+                                    <constraint firstItem="1Zt-Dt-mAp" firstAttribute="height" secondItem="iAI-kc-8j9" secondAttribute="height" multiplier="1:5" id="Luy-n6-jeR"/>
+                                    <constraint firstItem="bol-Lq-uLM" firstAttribute="width" secondItem="iAI-kc-8j9" secondAttribute="width" id="Umk-pB-Voo"/>
+                                    <constraint firstItem="1Zt-Dt-mAp" firstAttribute="leading" secondItem="iAI-kc-8j9" secondAttribute="leading" id="eUV-D7-N0w"/>
+                                    <constraint firstAttribute="width" constant="300" id="eez-uT-00p"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Zt-Dt-mAp" secondAttribute="trailing" id="hjH-ui-EJz"/>
+                                    <constraint firstItem="bol-Lq-uLM" firstAttribute="height" secondItem="iAI-kc-8j9" secondAttribute="height" multiplier="4:5" id="muU-Je-Z99"/>
+                                    <constraint firstItem="1Zt-Dt-mAp" firstAttribute="width" secondItem="iAI-kc-8j9" secondAttribute="width" id="qOg-gL-S91"/>
+                                    <constraint firstAttribute="bottom" secondItem="1Zt-Dt-mAp" secondAttribute="bottom" id="vsY-f9-4tJ"/>
+                                    <constraint firstItem="1Zt-Dt-mAp" firstAttribute="top" secondItem="bol-Lq-uLM" secondAttribute="bottom" id="xFd-V3-Teq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="iAI-kc-8j9" firstAttribute="centerY" secondItem="XhR-oz-92f" secondAttribute="centerY" id="1gk-wU-stW"/>
                             <constraint firstItem="i6u-Sa-ake" firstAttribute="top" secondItem="adT-US-0qK" secondAttribute="bottom" id="23k-Cz-Sqo"/>
                             <constraint firstAttribute="trailing" secondItem="adT-US-0qK" secondAttribute="trailing" id="3cC-ay-lDp"/>
+                            <constraint firstItem="iAI-kc-8j9" firstAttribute="height" secondItem="XhR-oz-92f" secondAttribute="height" multiplier="1:2" id="aey-2J-KKr"/>
+                            <constraint firstItem="iAI-kc-8j9" firstAttribute="centerX" secondItem="XhR-oz-92f" secondAttribute="centerX" id="eDd-j5-IQJ"/>
+                            <constraint firstItem="iAI-kc-8j9" firstAttribute="width" secondItem="XhR-oz-92f" secondAttribute="width" multiplier="8:10" id="eqK-7Z-eTJ"/>
                             <constraint firstItem="adT-US-0qK" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="hrZ-a5-HG4"/>
                             <constraint firstItem="adT-US-0qK" firstAttribute="top" secondItem="Pye-F9-fNl" secondAttribute="bottom" id="p58-5U-GTP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8qg-9A-1j1">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="lAh-kO-yL7">
+                            <connections>
+                                <action selector="sortBy:" destination="2xI-yr-O5N" id="H4n-Iv-LUe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="MapView" id="brR-J8-M3Q">
                             <connections>
                                 <segue destination="pEN-KY-Ot9" kind="show" identifier="MapViewResults" id="cBt-YR-elb"/>
@@ -135,6 +175,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="centerPopUp" destination="eDd-j5-IQJ" id="R28-Cb-ayV"/>
+                        <outlet property="picker" destination="bol-Lq-uLM" id="eX0-RK-6wz"/>
                         <outlet property="tableView" destination="adT-US-0qK" id="XTC-sk-bN3"/>
                     </connections>
                 </viewController>
